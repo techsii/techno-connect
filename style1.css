@@ -132,22 +132,311 @@ body {
     resize: none;
 }
 
-/* Create Channel Modal */
+/* Modal Overlay */
 .modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.75);
     display: none;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
+/* Modal Box */
 .modal-content {
-    background: var(--background-secondary);
-    padding: 20px;
-    border-radius: 8px;
+    background: var(--background-secondary, #2f3136);
+    padding: 30px 25px;
+    border-radius: 12px;
     width: 440px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    color: white;
+    animation: scaleIn 0.3s ease;
+}
+
+/* Title */
+.modal-content h3 {
+    margin-bottom: 15px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+/* Input Field */
+.modal-content input[type="text"] {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    background: #202225;
+    color: white;
+    margin-bottom: 20px;
+    outline: none;
+}
+
+.modal-content input::placeholder {
+    color: #b9bbbe;
+}
+
+/* Buttons */
+.modal-content button {
+    padding: 10px 18px;
+    font-size: 15px;
+    border: none;
+    border-radius: 6px;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.modal-content button:first-of-type {
+    background-color: #5865f2; /* Discord blurple */
+    color: white;
+}
+
+.modal-content button:first-of-type:hover {
+    background-color: #4752c4;
+}
+
+.modal-content button:last-of-type {
+    background-color: #4f545c;
+    color: white;
+}
+
+.modal-content button:last-of-type:hover {
+    background-color: #3e4147;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+
+.message-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.options-button {
+    margin-left: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    background: var(--background-tertiary);
+    padding: 6px 10px;
+    border-radius: 8px;
+    color: var(--text-normal);
+    transition: background 0.2s;
+}
+
+.options-button:hover {
+    background: var(--interactive-hover);
+}
+
+.attachment-options {
+    position: absolute;
+    bottom: 60px;
+    right: 10px;
+    background: var(--background-secondary);
+    border: 1px solid #202225;
+    border-radius: 10px;
+    padding: 10px;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+    animation: popupFade 0.3s ease;
+}
+
+.attachment-options {
+    position: absolute;
+    bottom: 60px;
+    right: 10px;
+    background: var(--background-secondary);
+    border: 1px solid #202225;
+    border-radius: 10px;
+    padding: 10px;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.attachment-options.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.attachment-options.fade-out {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+
+.attachment-options label:hover {
+    background: var(--interactive-hover);
+}
+
+.attachment-options input {
+    display: none;
+}
+
+@keyframes popupFade {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message-input {
+    position: relative;
+}
+
+
+/* Login Modal Styling */
+#loginModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(32, 34, 37, 0.95); /* Slightly dimmed background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+#loginModal .modal-content {
+    background: var(--background-secondary, #2f3136);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+#loginModal h3 {
+    color: var(--text-normal, #ffffff);
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#loginModal input[type="text"],
+#loginModal input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--background-tertiary, #202225);
+    color: var(--text-normal, #fff);
+    font-size: 14px;
+    outline: none;
+    transition: background 0.2s ease;
+}
+
+#loginModal input:focus {
+    background-color: #2e3136;
+    box-shadow: 0 0 0 2px var(--brand-experiment, #7289da);
+}
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--background-tertiary, #202225);
+    color: var(--text-normal, #fff);
+    font-size: 14px;
+    outline: none;
+    transition: background 0.2s ease;
+}
+
+.eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.eye-icon:hover {
+    opacity: 1;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--text-muted, #aaa);
+    user-select: none;
+    transition: color 0.2s ease;
+}
+
+.toggle-password:hover {
+    color: var(--text-normal, #fff);
+}
+
+#loginModal button {
+    width: 100%;
+    padding: 12px;
+    background: var(--brand-experiment, #5865f2);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+#loginModal button:hover {
+    background: #4752c4;
+}
+
+#loginError {
+    font-size: 13px;
+    color: #ff4d4d;
+    margin-bottom: 10px;
+    display: none;
 }

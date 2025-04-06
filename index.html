@@ -7,6 +7,28 @@
     <link rel="stylesheet" href="style1.css">
 </head>
 <body>
+
+   <!-- Student Login Modal -->
+<div class="modal" id="loginModal" style="display: flex;">
+<div class="modal-content login-box">
+    <h3>Student Login</h3>
+
+    <input type="text" id="studentIdInput" placeholder="Enter your Student ID">
+
+    <div class="password-wrapper" style="position: relative;">
+        <input type="password" id="passwordInput" placeholder="Enter default password">
+        <img src="eyehide.png" class="toggle-password" onclick="togglePasswordVisibility()" alt="Toggle" style="position: absolute; right: 10px; top: 38%; transform: translateY(-50%); cursor: pointer; width: 20px;">
+    </div>
+    
+    
+
+    <div id="loginError" class="error-msg" style="display: none;"></div>
+
+    <button onclick="verifyStudent()">Login</button>
+</div>
+</div>
+
+    
     <!-- Server List -->
     <div class="server-list">
         <div class="server-icon">TC</div>
@@ -43,7 +65,24 @@
 
         <div class="message-input">
             <textarea placeholder="Message #general-chat"></textarea>
+            <div class="options-button" onclick="toggleAttachmentOptions()">⋯</div>
+            <div class="attachment-options" id="attachmentOptions">
+                <label title="Upload File">
+                    📎
+                    <input type="file" onchange="handleFileUpload(event)" />
+                </label>
+                <label title="Image">
+                    🖼️
+                    <input type="file" accept="image/*" onchange="handleFileUpload(event)" />
+                </label>
+                <label title="PDF">
+                    📄
+                    <input type="file" accept="application/pdf" onchange="handleFileUpload(event)" />
+                </label>
+            </div>
         </div>
+        
+        
     </div>
 
     <!-- Create Channel Modal -->
@@ -52,7 +91,17 @@
             <h3>Create Channel</h3>
             <input type="text" placeholder="Channel name">
             <button onclick="createChannel()">Create</button>
-            <button onclick="hideModal()">Cancel</button>
+            <button onclick="hideModal('createChannelModal')">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Add Department Modal -->
+    <div class="modal" id="addDepartmentModal">
+        <div class="modal-content">
+            <h3>Add Department</h3>
+            <input type="text" id="departmentNameInput" placeholder="Department name">
+            <button onclick="createDepartment()">Add</button>
+            <button onclick="hideModal('addDepartmentModal')">Cancel</button>
         </div>
     </div>
 
